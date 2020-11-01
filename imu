@@ -1,0 +1,60 @@
+#!/bin/bash
+
+function show_help {
+  echo "Use imu -d 1.2.3.4 -c 'comment' to block 1.2.3.4"
+}
+
+# A POSIX variable
+OPTIND=1 # Reset in case getopts has been used previously in the shell.
+# Initialize our own variables:
+block_ip=""
+
+while getopts "h?d:c:g:" opt; do
+    case "$opt" in
+    h|\?)
+      show_help
+      exit 0
+      ;;
+      
+    d)  action='deny'
+        ip=$OPTARG
+        ;;
+        
+    g)  action='grep'
+        ip=$OPTARG
+        break
+        ;;
+       
+    r)  action='remove'
+        ip=$OPTARG
+        break
+        ;;
+    
+    c) comment=$OPTARG
+       ;;
+       
+    esac
+done
+
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+
+if [ -z "$ip" ]; then
+    echo "You did not provide an IP address. Ex: use -d 1.2.3.4 to block that IP."
+    exit 0
+fi
+
+# Ref: https://docs.imunify360.com/command_line_interface/ 
+
+case "$action" in
+  deny)
+    imunify360-agent blacklist ip add $ip --comment "$comment" --scope cliblocks
+    ;;
+  grep)
+    imunify360-agent blacklist ip list --by-ip $ip
+    ;;
+  remove)
+    imunify360-agent blacklist ip delete $ip
+    ;;
+esac
+    
