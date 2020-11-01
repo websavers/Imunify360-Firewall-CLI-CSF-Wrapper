@@ -9,7 +9,7 @@ OPTIND=1 # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 block_ip=""
 
-while getopts "h?d:c:g:" opt; do
+while getopts "h?d:g:r:c:" opt; do
     case "$opt" in
     h|\?)
       show_help
