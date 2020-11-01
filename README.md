@@ -6,7 +6,7 @@
  - Via SSH, as root, run: 
 
  ```
- curl -o /usr/local/bin/imu https://raw.githubusercontent.com/websavers/Imunify360-Firewall-CLI-CSF-Wrapper/master/imu
+ curl -o /usr/local/bin/imu https://raw.githubusercontent.com/websavers/Imunify360-Firewall-CLI-CSF-Wrapper/main/imu
  chmod +x /usr/local/bin/imu
  ln -s /usr/local/bin/imu /usr/bin/imu
  ```
