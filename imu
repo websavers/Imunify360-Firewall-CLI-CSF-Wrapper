@@ -48,7 +48,7 @@ fi
 
 case "$action" in
   deny)
-    imunify360-agent blacklist ip add $ip --comment "$comment" --scope cliblocks
+    imunify360-agent blacklist ip add $ip --comment "$comment"
     ;;
   grep)
     imunify360-agent blacklist ip list --by-ip $ip
