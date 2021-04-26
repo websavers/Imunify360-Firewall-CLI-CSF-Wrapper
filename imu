@@ -51,7 +51,10 @@ case "$action" in
     imunify360-agent blacklist ip add $ip --comment "$comment"
     ;;
   grep)
+    echo "BLACKLIST RESULTS"
     imunify360-agent blacklist ip list --by-ip $ip
+    echo "GRAYLIST RESULTS"
+    imunify360-agent graylist ip list --by-ip $ip
     ;;
   remove)
     imunify360-agent blacklist ip delete $ip
